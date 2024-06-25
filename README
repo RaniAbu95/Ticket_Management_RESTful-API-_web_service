@@ -1,0 +1,94 @@
+------------------------------------------------------------------------------------------------------------------------
+Author: Rani Abu Raia
+------------------------------------------------------------------------------------------------------------------------
+# Ticket Management RESTful(API) web service
+
+This is a simple Express-based RESTful API for managing tickets. It provides endpoints to create, read, update,
+and delete tickets, with support for querying tickets based on specific criteria.
+
+
+## Prerequisites
+
+- Node.js (version 12.x or higher)
+- npm (Node Package Manager)
+
+## Setup
+
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd <repository-directory>
+
+
+Install dependencies:
+npm install
+
+Create the input file/data.json file and populate it with initial data if not already present.
+The JSON file should be an array of ticket objects. Example:
+[
+  {
+    "id": "81a885d6-8f68-5bc0-bbbc-1c7b32e4b4e4",
+    "title": "Sample Ticket",
+    "content": "This is a sample ticket.",
+    "userEmail": "user@example.com",
+    "creationTime": 1625097600,
+    "labels": ["Sample", "Example"]
+  }
+]
+
+Start the server:
+node server.js
+The server will start on port 3000.
+
+API Endpoints:
+
+Get All Tickets
+Endpoint: GET /tickets
+Description: Fetch all tickets with optional query parameters for filtering.
+Query Parameters:
+from (optional): Start time in Unix timestamp.
+to (optional): End time in Unix timestamp.
+search (optional): Search term to filter tickets by title, content, or user email.
+Response: JSON array of filtered tickets.
+
+Get Ticket by ID
+Endpoint: GET /tickets/:id
+Description: Fetch a single ticket by its ID.
+Response: JSON object of the ticket or a 404 error if not found.
+
+Create a New Ticket
+Endpoint: POST /tickets
+Description: Create a new ticket.
+Request Body:
+JSON object representing the new ticket.
+json
+Copy code
+{
+  "id": "unique-id",
+  "title": "New Ticket",
+  "content": "Content of the new ticket.",
+  "userEmail": "user@example.com",
+  "creationTime": 1625097600,
+  "labels": ["Label1", "Label2"]
+}
+Response: JSON object of the created ticket with status 201.
+
+Update a Ticket
+Endpoint: PUT /tickets/:id
+Description: Update an existing ticket by its ID.
+Request Body:
+JSON object representing the
+
+Delete a Ticket
+Endpoint: DELETE /tickets/:id
+Description: Delete a ticket by its ID.
+Response: JSON object of the deleted ticket or a 404 error if not found.
+
+
+Error Handling:
+The API will return a 404 status code if a ticket is not found for GET, PUT, and DELETE requests.
+The API will log an error and exit if the data.json file cannot be read or parsed during startup.
+
+Notes:
+Ensure that the id field in each ticket is unique.
+The creationTime should be a Unix timestamp.
